@@ -8,7 +8,7 @@ async function bootstrap() {
 
   const configService = app.get<ConfigService<Env, true>>(ConfigService);
   const port = configService.get('PORT', { infer: true });
-  
+
   await app.listen(port);
 }
 bootstrap();
