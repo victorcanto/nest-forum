@@ -11,7 +11,7 @@ export class PrismaService
       log: ['warn', 'error'],
     });
   }
-  
+
   onModuleInit() {
     return this.$connect();
   }
