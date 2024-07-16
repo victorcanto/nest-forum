@@ -1,11 +1,7 @@
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
-import {
-  ConflictException,
-  UnauthorizedException,
-  UsePipes,
-} from '@nestjs/common';
+import { UnauthorizedException, UsePipes } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { z } from 'zod';
 import { compare } from 'bcryptjs';
