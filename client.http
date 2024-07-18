@@ -32,7 +32,7 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Nova pergunta 2",
+    "title": "Nova pergunta 1",
     "content": "Conteudo da pergunta"
 }
 
@@ -42,3 +42,4 @@ Authorization: Bearer {{authToken}}
 GET {{baseUrl}}/questions?page=1
 Content-Type: application/json
 Authorization:  Bearer {{authToken}}
+

@@ -1,6 +1,6 @@
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
 import { UnauthorizedException, UsePipes } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../database/prisma/prisma.service';
 import { Body, Controller, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { z } from 'zod';

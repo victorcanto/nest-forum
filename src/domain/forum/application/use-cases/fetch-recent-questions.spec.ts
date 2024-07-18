@@ -1,11 +1,11 @@
 import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory/in-memory-questions-repository';
 import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-question-attachments-repository';
-import { FetchRecentTopicsUseCase } from './fetch-recent-topics';
+import { FetchRecentQuestionsUseCase } from './fetch-recent-questions';
 import { makeQuestion } from '@/test/factories/make-question';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;
-  sut: FetchRecentTopicsUseCase;
+  sut: FetchRecentQuestionsUseCase;
 };
 
 const makeSut = (): SutTypes => {
@@ -14,7 +14,7 @@ const makeSut = (): SutTypes => {
   const questionsRepository = new InMemoryQuestionsRepository(
     questionAttachmentsRepository,
   );
-  const sut = new FetchRecentTopicsUseCase(questionsRepository);
+  const sut = new FetchRecentQuestionsUseCase(questionsRepository);
   return {
     questionsRepository,
     sut,

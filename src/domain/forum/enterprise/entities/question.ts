@@ -14,7 +14,7 @@ export class Question extends AggregateRoot<QuestionProps> {
     return new Question(
       {
         ...props,
-        slug: props.slug ?? Slug.create(props.title),
+        slug: props.slug ?? Slug.createFromText(props.title),
         attachments: props.attachments ?? new QuestionAttachmentList(),
         createdAt: props.createdAt ?? new Date(),
       },
@@ -78,7 +78,7 @@ export class Question extends AggregateRoot<QuestionProps> {
     this.touch();
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
+  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined | null) {
     if (bestAnswerId && bestAnswerId !== this.props.bestAnswerId) {
       this.addDomainEvent(
         new QuestionBestAnswerChosenEvent(this, bestAnswerId),
@@ -95,11 +95,11 @@ export class Question extends AggregateRoot<QuestionProps> {
 
 export type QuestionProps = {
   authorId: UniqueEntityId;
-  bestAnswerId?: UniqueEntityId;
+  bestAnswerId?: UniqueEntityId | null;
   title: string;
   content: string;
   slug: Slug;
   attachments: QuestionAttachmentList;
   createdAt: Date;
-  updatedAt?: Date;
+  updatedAt?: Date | null;
 };
