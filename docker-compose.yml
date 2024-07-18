@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: nest-clean-pg
+    container_name: nest-forum-pg
     image: postgres
     restart: always
     ports:
@@ -8,7 +8,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=nest-clean
+      - POSTGRES_DB=nestforum
       - PGDATA=/data/postgres
     volumes:
       - ./data/pg:/data/postgres
