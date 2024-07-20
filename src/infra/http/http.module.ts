@@ -8,9 +8,16 @@ import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/crea
 import { DatabaseModule } from '../database/database.module';
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions';
+import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student';
+import { CryptographyModule } from '../cryptography/cryptography.module';
+import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository';
+import { HashComparer } from '@/domain/forum/application/cryptography/hash-comparer';
+import { Encrypter } from '@/domain/forum/application/cryptography/encrypter';
+import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student';
+import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, CryptographyModule],
   controllers: [
     AuthenticateController,
     CreateAccountController,
@@ -18,6 +25,15 @@ import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-case
     FetchRecentQuestionsController,
   ],
   providers: [
+    makeFactoryProvider(AuthenticateStudentUseCase, [
+      StudentsRepository,
+      HashComparer,
+      Encrypter,
+    ]),
+    makeFactoryProvider(RegisterStudentUseCase, [
+      StudentsRepository,
+      HashGenerator,
+    ]),
     makeFactoryProvider(CreateQuestionUseCase, [QuestionsRepository]),
     makeFactoryProvider(FetchRecentQuestionsUseCase, [QuestionsRepository]),
   ],
