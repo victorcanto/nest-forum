@@ -41,6 +41,9 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     const questions = await this.prisma.question.findMany({
       skip: (params.page - 1) * 20,
       take: 20,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     return questions.map(PrismaQuestionMapper.toDomain);
