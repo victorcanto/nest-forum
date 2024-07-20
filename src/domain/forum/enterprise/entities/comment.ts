@@ -34,5 +34,5 @@ export type CommentProps = {
   authorId: UniqueEntityId;
   content: string;
   createdAt: Date;
-  updatedAt?: Date;
+  updatedAt?: Date | null;
 };

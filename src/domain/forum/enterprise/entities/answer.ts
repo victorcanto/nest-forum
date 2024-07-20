@@ -73,5 +73,5 @@ export type AnswerProps = {
   attachments: AnswerAttachmentList;
   content: string;
   createdAt: Date;
-  updatedAt?: Date;
+  updatedAt?: Date | null;
 };
