@@ -1,9 +1,11 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Question } from '@/domain/forum/enterprise/entities/question';
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
-import { Either, right } from '@/core/either';
+import { Either, left, right } from '@/core/either';
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment';
 import { QuestionAttachmentList } from '@/domain/forum/enterprise/entities/question-attachment-list';
+import { Slug } from '../../enterprise/entities/value-objects/slug';
+import { QuestionAlreadyExistsError } from './errors/question-already-exists-error';
 
 export class CreateQuestionUseCase {
   constructor(private readonly questionsRepository: QuestionsRepository) {}
@@ -14,6 +16,14 @@ export class CreateQuestionUseCase {
     content,
     attachmentsIds,
   }: CreateQuestionUseCaseRequest): Promise<CreateQuestionUseCaseResponse> {
+    const questionAlreadyExists = await this.questionsRepository.findBySlug(
+      Slug.createFromText(title).value,
+    );
+
+    if (questionAlreadyExists) {
+      return left(new QuestionAlreadyExistsError(title));
+    }
+
     const question = Question.create({
       authorId: new UniqueEntityId(authorId),
       title,
@@ -44,4 +54,7 @@ type CreateQuestionUseCaseRequest = {
   attachmentsIds: string[];
 };
 
-type CreateQuestionUseCaseResponse = Either<null, { question: Question }>;
+type CreateQuestionUseCaseResponse = Either<
+  QuestionAlreadyExistsError,
+  { question: Question }
+>;
