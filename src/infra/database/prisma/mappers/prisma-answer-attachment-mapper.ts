@@ -1,9 +1,9 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment';
-import { Comment as PrismaComment, Prisma } from '@prisma/client';
+import { Attachment as PrismaAttachment, Prisma } from '@prisma/client';
 
 export class PrismaAnswerAttachmentMapper {
-  static toDomain(raw: PrismaComment): AnswerAttachment {
+  static toDomain(raw: PrismaAttachment): AnswerAttachment {
     if (!raw.answerId) {
       throw new Error('Invalid comment type');
     }
