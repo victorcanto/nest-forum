@@ -4,28 +4,29 @@ import { AppModule } from '@/infra/app.module';
 import request from 'supertest';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { hash } from 'bcryptjs';
+import { StudentFactory } from '@/test/factories/make-student';
+import { DatabaseModule } from '@/infra/database/database.module';
 
 describe('Authenticate (e2e)', () => {
   let app: INestApplication;
-  let prisma: PrismaService;
+  let studentFactory: StudentFactory;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [StudentFactory],
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    prisma = moduleFixture.get<PrismaService>(PrismaService);
+    studentFactory = moduleFixture.get<StudentFactory>(StudentFactory);
     await app.init();
   });
 
   it('[POST] /sessions', async () => {
-    await prisma.user.create({
-      data: {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: await hash('123456', 8),
-      },
+    await studentFactory.makePrismaStudent({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: await hash('123456', 8),
     });
     const response = await request(app.getHttpServer()).post('/sessions').send({
       email: 'johndoe@example.com',
