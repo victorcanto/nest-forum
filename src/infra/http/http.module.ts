@@ -15,6 +15,8 @@ import { HashComparer } from '@/domain/forum/application/cryptography/hash-compa
 import { Encrypter } from '@/domain/forum/application/cryptography/encrypter';
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student';
 import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
+import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug';
+import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -23,6 +25,7 @@ import { HashGenerator } from '@/domain/forum/application/cryptography/hash-gene
     CreateAccountController,
     CreateQuestionController,
     FetchRecentQuestionsController,
+    GetQuestionBySlugController,
   ],
   providers: [
     makeFactoryProvider(AuthenticateStudentUseCase, [
@@ -36,6 +39,7 @@ import { HashGenerator } from '@/domain/forum/application/cryptography/hash-gene
     ]),
     makeFactoryProvider(CreateQuestionUseCase, [QuestionsRepository]),
     makeFactoryProvider(FetchRecentQuestionsUseCase, [QuestionsRepository]),
+    makeFactoryProvider(GetQuestionBySlugUseCase, [QuestionsRepository]),
   ],
 })
 export class HttpModule {}
