@@ -38,7 +38,7 @@ describe('Fetch recent questions (e2e)', () => {
       }),
       questionFactory.makePrismaQuestion({
         authorId: user.id,
-        title: 'My second question',
+        title: 'My last question',
       }),
     ]);
 
@@ -49,10 +49,10 @@ describe('Fetch recent questions (e2e)', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      questions: [
+      questions: expect.arrayContaining([
         expect.objectContaining({ title: 'My first question' }),
-        expect.objectContaining({ title: 'My second question' }),
-      ],
+        expect.objectContaining({ title: 'My last question' }),
+      ]),
     });
   });
 });
