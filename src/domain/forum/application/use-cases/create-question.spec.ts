@@ -31,10 +31,12 @@ describe('Create Question', () => {
       attachmentsIds: ['1', '2'],
     });
     expect(result.isRight()).toBe(true);
-    expect(questionsRepository.items[0]).toEqual(result.value?.question);
-    expect(questionsRepository.items[0].attachments.currentItems).toHaveLength(
-      2,
-    );
+    if (result.isRight()) {
+      expect(questionsRepository.items[0]).toEqual(result.value?.question);
+      expect(
+        questionsRepository.items[0].attachments.currentItems,
+      ).toHaveLength(2);
+    }
     expect(questionsRepository.items[0].attachments.currentItems).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
