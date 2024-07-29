@@ -7,6 +7,7 @@ import { FetchRecentQuestionsController } from './controllers/fetch-recent-quest
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question';
 import { DatabaseModule } from '../database/database.module';
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
+import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository';
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions';
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student';
 import { CryptographyModule } from '../cryptography/cryptography.module';
@@ -17,6 +18,8 @@ import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/reg
 import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug';
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
+import { EditQuestionController } from './controllers/edit-question.controller';
+import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -24,6 +27,7 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     AuthenticateController,
     CreateAccountController,
     CreateQuestionController,
+    EditQuestionController,
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
   ],
@@ -38,6 +42,7 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
       HashGenerator,
     ]),
     makeFactoryProvider(CreateQuestionUseCase, [QuestionsRepository]),
+    makeFactoryProvider(EditQuestionUseCase, [QuestionsRepository, QuestionAttachmentsRepository]),
     makeFactoryProvider(FetchRecentQuestionsUseCase, [QuestionsRepository]),
     makeFactoryProvider(GetQuestionBySlugUseCase, [QuestionsRepository]),
   ],
