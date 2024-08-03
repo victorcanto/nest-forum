@@ -9,13 +9,13 @@ export class AnswerQuestionUseCase {
   constructor(private readonly answersRepository: AnswersRepository) {}
 
   async execute({
-    instructorId,
+    authorId,
     questionId,
     attachmentsIds,
     content,
   }: AnswerQuestionUseCaseRequest): Promise<AnswerQuestionUseCaseResponse> {
     const answer = Answer.create({
-      authorId: new UniqueEntityId(instructorId),
+      authorId: new UniqueEntityId(authorId),
       questionId: new UniqueEntityId(questionId),
       content,
     });
@@ -36,7 +36,7 @@ export class AnswerQuestionUseCase {
 }
 
 type AnswerQuestionUseCaseRequest = {
-  instructorId: string;
+  authorId: string;
   questionId: string;
   attachmentsIds: string[];
   content: string;
