@@ -20,6 +20,11 @@ import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/g
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question';
+import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question';
+import { DeleteQuestionController } from './controllers/delete-question.controller';
+import { AnswerQuestionController } from './controllers/answer-question.controller';
+import { AnswerQuestionUseCase } from '@/domain/forum/application/use-cases/answer-question';
+import { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -28,8 +33,10 @@ import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-q
     CreateAccountController,
     CreateQuestionController,
     EditQuestionController,
+    DeleteQuestionController,
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
+    AnswerQuestionController,
   ],
   providers: [
     makeFactoryProvider(AuthenticateStudentUseCase, [
@@ -42,9 +49,14 @@ import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-q
       HashGenerator,
     ]),
     makeFactoryProvider(CreateQuestionUseCase, [QuestionsRepository]),
-    makeFactoryProvider(EditQuestionUseCase, [QuestionsRepository, QuestionAttachmentsRepository]),
+    makeFactoryProvider(EditQuestionUseCase, [
+      QuestionsRepository,
+      QuestionAttachmentsRepository,
+    ]),
+    makeFactoryProvider(DeleteQuestionUseCase, [QuestionsRepository]),
     makeFactoryProvider(FetchRecentQuestionsUseCase, [QuestionsRepository]),
     makeFactoryProvider(GetQuestionBySlugUseCase, [QuestionsRepository]),
+    makeFactoryProvider(AnswerQuestionUseCase, [AnswersRepository]),
   ],
 })
 export class HttpModule {}
