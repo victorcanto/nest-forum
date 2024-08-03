@@ -7,14 +7,14 @@ import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question';
 import { QuestionAlreadyExistsError } from '@/domain/forum/application/use-cases/errors/question-already-exists-error';
 
-const createQuestionnBodySchema = z.object({
+const createQuestionBodySchema = z.object({
   title: z.string(),
   content: z.string(),
 });
 
-type CreateQuestionBodySchema = z.infer<typeof createQuestionnBodySchema>;
+type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>;
 
-const bodyValidationPipe = new ZodValidationPipe(createQuestionnBodySchema);
+const bodyValidationPipe = new ZodValidationPipe(createQuestionBodySchema);
 
 @Controller('/questions')
 export class CreateQuestionController {
