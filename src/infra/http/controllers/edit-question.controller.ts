@@ -1,7 +1,6 @@
 import { CurrentUser } from '../../auth/current-user.decorator';
 import {
   BadRequestException,
-  ConflictException,
   HttpCode,
   Param,
   Put,
@@ -12,7 +11,6 @@ import { z } from 'zod';
 import { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question';
-import { QuestionAlreadyExistsError } from '@/domain/forum/application/use-cases/errors/question-already-exists-error';
 
 const editQuestionnBodySchema = z.object({
   title: z.string(),
@@ -48,13 +46,7 @@ export class EditQuestionController {
 
     if (result.isLeft()) {
       const error = result.value;
-
-      switch (error.constructor) {
-        case QuestionAlreadyExistsError:
-          throw new ConflictException(error.message);
-        default:
-          throw new BadRequestException(error.message);
-      }
+      throw new BadRequestException(error.message);
     }
   }
 }
