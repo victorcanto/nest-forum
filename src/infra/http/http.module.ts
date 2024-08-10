@@ -28,6 +28,8 @@ import { AnswersRepository } from '@/domain/forum/application/repositories/answe
 import { EditAnswerController } from './controllers/edit-answer.controller';
 import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer';
 import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository';
+import { DeleteAnswerController } from './controllers/delete-answer.controller';
+import { DeleteAnswerUseCase } from '@/domain/forum/application/use-cases/delete-answer';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -41,6 +43,7 @@ import { AnswerAttachmentsRepository } from '@/domain/forum/application/reposito
     GetQuestionBySlugController,
     AnswerQuestionController,
     EditAnswerController,
+    DeleteAnswerController,
   ],
   providers: [
     makeFactoryProvider(AuthenticateStudentUseCase, [
@@ -65,6 +68,7 @@ import { AnswerAttachmentsRepository } from '@/domain/forum/application/reposito
       AnswersRepository,
       AnswerAttachmentsRepository,
     ]),
+    makeFactoryProvider(DeleteAnswerUseCase, [AnswersRepository]),
   ],
 })
 export class HttpModule {}
