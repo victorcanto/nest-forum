@@ -1,23 +1,18 @@
 import { CurrentUser } from '../../auth/current-user.decorator';
-import {
-  BadRequestException,
-  ConflictException,
-  HttpCode,
-  Param,
-} from '@nestjs/common';
+import { BadRequestException, Param } from '@nestjs/common';
 import { Body, Controller, Post } from '@nestjs/common';
 import { z } from 'zod';
 import { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question';
 
-const answerQuestionBodySchema = z.object({
+const commentOnQuestionBodySchema = z.object({
   content: z.string(),
 });
 
-type CommentOnQuestionBodySchema = z.infer<typeof answerQuestionBodySchema>;
+type CommentOnQuestionBodySchema = z.infer<typeof commentOnQuestionBodySchema>;
 
-const bodyValidationPipe = new ZodValidationPipe(answerQuestionBodySchema);
+const bodyValidationPipe = new ZodValidationPipe(commentOnQuestionBodySchema);
 
 @Controller('/questions/:questionId/comments')
 export class CommentOnQuestionController {
