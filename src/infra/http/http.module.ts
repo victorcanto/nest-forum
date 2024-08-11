@@ -42,6 +42,8 @@ import { DeleteQuestionCommentUseCase } from '@/domain/forum/application/use-cas
 import { CommentOnAnswerController } from './controllers/comment-on-answer.controller';
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer';
 import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository';
+import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller';
+import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -61,6 +63,7 @@ import { AnswerCommentsRepository } from '@/domain/forum/application/repositorie
     CommentOnQuestionController,
     DeleteQuestionCommentController,
     CommentOnAnswerController,
+    DeleteAnswerCommentController,
   ],
   providers: [
     makeFactoryProvider(AuthenticateStudentUseCase, [
@@ -102,6 +105,7 @@ import { AnswerCommentsRepository } from '@/domain/forum/application/repositorie
       AnswersRepository,
       AnswerCommentsRepository,
     ]),
+    makeFactoryProvider(DeleteAnswerCommentUseCase, [AnswerCommentsRepository]),
   ],
 })
 export class HttpModule {}
