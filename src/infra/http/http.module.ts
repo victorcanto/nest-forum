@@ -37,6 +37,8 @@ import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-
 import { CommentOnQuestionController } from './controllers/comment-on-question.controller';
 import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question';
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository';
+import { DeleteQuestionCommentController } from './controllers/delete-question-comment.controller';
+import { DeleteQuestionCommentUseCase } from '@/domain/forum/application/use-cases/delete-question-comment';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -54,6 +56,7 @@ import { QuestionCommentsRepository } from '@/domain/forum/application/repositor
     FetchQuestionAnswersController,
     ChooseQuestionBestAnswerController,
     CommentOnQuestionController,
+    DeleteQuestionCommentController,
   ],
   providers: [
     makeFactoryProvider(AuthenticateStudentUseCase, [
@@ -86,6 +89,9 @@ import { QuestionCommentsRepository } from '@/domain/forum/application/repositor
     ]),
     makeFactoryProvider(CommentOnQuestionUseCase, [
       QuestionsRepository,
+      QuestionCommentsRepository,
+    ]),
+    makeFactoryProvider(DeleteQuestionCommentUseCase, [
       QuestionCommentsRepository,
     ]),
   ],
