@@ -1,6 +1,6 @@
-import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory/in-memory-notifications-repository';
+import { InMemoryNotificationsRepository } from 'test/repositories/in-memory/in-memory-notifications-repository';
 import { ReadNotificationUseCase } from './read-notification';
-import { makeNotification } from '@/test/factories/make-notification';
+import { makeNotification } from 'test/factories/make-notification';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { NotAllowedError } from './errors/not-allowed-error';
 

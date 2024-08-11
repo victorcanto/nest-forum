@@ -3,11 +3,11 @@ import { INestApplication } from '@nestjs/common';
 import { AppModule } from '@/infra/app.module';
 import request from 'supertest';
 import { JwtService } from '@nestjs/jwt';
-import { StudentFactory } from '@/test/factories/make-student';
-import { QuestionFactory } from '@/test/factories/make-question';
+import { StudentFactory } from 'test/factories/make-student';
+import { QuestionFactory } from 'test/factories/make-question';
 import { DatabaseModule } from '@/infra/database/database.module';
-import { AnswerFactory } from '@/test/factories/make-answer';
-import { AnswerCommentFactory } from '@/test/factories/make-answer-comment';
+import { AnswerFactory } from 'test/factories/make-answer';
+import { AnswerCommentFactory } from 'test/factories/make-answer-comment';
 
 describe('Fetch answer comments (e2e)', () => {
   let app: INestApplication;

@@ -3,9 +3,9 @@ import { INestApplication } from '@nestjs/common';
 import { AppModule } from '@/infra/app.module';
 import request from 'supertest';
 import { JwtService } from '@nestjs/jwt';
-import { StudentFactory } from '@/test/factories/make-student';
+import { StudentFactory } from 'test/factories/make-student';
 import { DatabaseModule } from '@/infra/database/database.module';
-import { QuestionFactory } from '@/test/factories/make-question';
+import { QuestionFactory } from 'test/factories/make-question';
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
 
 describe('Get question by slug (e2e)', () => {

@@ -1,7 +1,7 @@
-import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory/in-memory-questions-repository';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory/in-memory-questions-repository';
 import { CreateQuestionUseCase } from './create-question';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-question-attachments-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;

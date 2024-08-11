@@ -1,4 +1,4 @@
-import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory/in-memory-notifications-repository';
+import { InMemoryNotificationsRepository } from 'test/repositories/in-memory/in-memory-notifications-repository';
 import { SendNotificationUseCase } from './send-notification';
 
 type SutTypes = {

@@ -1,8 +1,8 @@
-import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory/in-memory-questions-repository';
-import { InMemoryQuestionCommentsRepository } from '@/test/repositories/in-memory/in-memory-question-comments-repository';
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-question-attachments-repository';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory/in-memory-questions-repository';
+import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory/in-memory-question-comments-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
 import { CommentOnQuestionUseCase } from './comment-on-question';
-import { makeQuestion } from '@/test/factories/make-question';
+import { makeQuestion } from 'test/factories/make-question';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 type SutTypes = {

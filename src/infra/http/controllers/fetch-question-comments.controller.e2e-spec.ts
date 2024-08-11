@@ -3,10 +3,10 @@ import { INestApplication } from '@nestjs/common';
 import { AppModule } from '@/infra/app.module';
 import request from 'supertest';
 import { JwtService } from '@nestjs/jwt';
-import { StudentFactory } from '@/test/factories/make-student';
-import { QuestionFactory } from '@/test/factories/make-question';
+import { StudentFactory } from 'test/factories/make-student';
+import { QuestionFactory } from 'test/factories/make-question';
 import { DatabaseModule } from '@/infra/database/database.module';
-import { QuestionCommentFactory } from '@/test/factories/make-question-comment';
+import { QuestionCommentFactory } from 'test/factories/make-question-comment';
 
 describe('Fetch question comments (e2e)', () => {
   let app: INestApplication;

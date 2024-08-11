@@ -1,9 +1,9 @@
-import { InMemoryStudentsRepository } from '@/test/repositories/in-memory/in-memory-students-repository';
-import { FakeHasher } from '@/test/cryptography/fake-hasher';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory/in-memory-students-repository';
+import { FakeHasher } from 'test/cryptography/fake-hasher';
 import { AuthenticateStudentUseCase } from './authenticate-student';
 import { Encrypter } from '../cryptography/encrypter';
-import { FakeEncrypter } from '@/test/cryptography/fake-encrypter';
-import { makeStudent } from '@/test/factories/make-student';
+import { FakeEncrypter } from 'test/cryptography/fake-encrypter';
+import { makeStudent } from 'test/factories/make-student';
 
 type SutTypes = {
   studentsRepository: InMemoryStudentsRepository;

@@ -1,9 +1,9 @@
-import { InMemoryAnswersRepository } from '@/test/repositories/in-memory/in-memory-answers-repository';
-import { InMemoryAnswerCommentsRepository } from '@/test/repositories/in-memory/in-memory-answer-comments-repository';
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory/in-memory-answers-repository';
+import { InMemoryAnswerCommentsRepository } from 'test/repositories/in-memory/in-memory-answer-comments-repository';
 import { CommentOnAnswerUseCase } from './comment-on-answer';
-import { makeAnswer } from '@/test/factories/make-answer';
+import { makeAnswer } from 'test/factories/make-answer';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
-import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-answer-attachments-repository';
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
 
 type SutTypes = {
   answersRepository: InMemoryAnswersRepository;

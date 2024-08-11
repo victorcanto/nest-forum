@@ -5,9 +5,9 @@ import request from 'supertest';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { DatabaseModule } from '@/infra/database/database.module';
-import { StudentFactory } from '@/test/factories/make-student';
-import { QuestionFactory } from '@/test/factories/make-question';
-import { QuestionCommentFactory } from '@/test/factories/make-question-comment';
+import { StudentFactory } from 'test/factories/make-student';
+import { QuestionFactory } from 'test/factories/make-question';
+import { QuestionCommentFactory } from 'test/factories/make-question-comment';
 
 describe('Delete question comment (e2e)', () => {
   let app: INestApplication;

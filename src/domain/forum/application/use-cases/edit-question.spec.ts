@@ -1,12 +1,12 @@
-import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory/in-memory-questions-repository';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory/in-memory-questions-repository';
 import { EditQuestionUseCase } from './edit-question';
-import { makeQuestion } from '@/test/factories/make-question';
+import { makeQuestion } from 'test/factories/make-question';
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { NotAllowedError } from './errors/not-allowed-error';
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-question-attachments-repository';
-import { makeQuestionAttachment } from '@/test/factories/make-question-attachment';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
+import { makeQuestionAttachment } from 'test/factories/make-question-attachment';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;

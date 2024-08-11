@@ -1,7 +1,7 @@
-import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory/in-memory-questions-repository';
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-question-attachments-repository';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory/in-memory-questions-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
 import { FetchRecentQuestionsUseCase } from './fetch-recent-questions';
-import { makeQuestion } from '@/test/factories/make-question';
+import { makeQuestion } from 'test/factories/make-question';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;

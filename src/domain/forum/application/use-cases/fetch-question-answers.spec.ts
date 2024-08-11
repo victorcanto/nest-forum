@@ -1,8 +1,8 @@
-import { InMemoryAnswersRepository } from '@/test/repositories/in-memory/in-memory-answers-repository';
-import { makeQuestion } from '@/test/factories/make-question';
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory/in-memory-answers-repository';
+import { makeQuestion } from 'test/factories/make-question';
 import { FetchQuestionAnswersUseCase } from './fetch-question-answers';
-import { makeAnswer } from '@/test/factories/make-answer';
-import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-answer-attachments-repository';
+import { makeAnswer } from 'test/factories/make-answer';
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
 
 type SutTypes = {
   answersRepository: InMemoryAnswersRepository;

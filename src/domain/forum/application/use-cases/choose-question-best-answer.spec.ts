@@ -1,14 +1,14 @@
-import { InMemoryAnswersRepository } from '@/test/repositories/in-memory/in-memory-answers-repository';
-import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory/in-memory-questions-repository';
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory/in-memory-answers-repository';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory/in-memory-questions-repository';
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer';
-import { makeQuestion } from '@/test/factories/make-question';
+import { makeQuestion } from 'test/factories/make-question';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
-import { makeAnswer } from '@/test/factories/make-answer';
+import { makeAnswer } from 'test/factories/make-answer';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { NotAllowedError } from './errors/not-allowed-error';
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-question-attachments-repository';
-import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-answer-attachments-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;

@@ -1,11 +1,11 @@
-import { makeAnswer } from '@/test/factories/make-answer';
-import { InMemoryAnswersRepository } from '@/test/repositories/in-memory/in-memory-answers-repository';
-import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-answer-attachments-repository';
-import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory/in-memory-questions-repository';
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory/in-memory-question-attachments-repository';
+import { makeAnswer } from 'test/factories/make-answer';
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory/in-memory-answers-repository';
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory/in-memory-questions-repository';
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
 import { SendNotificationUseCase } from '../use-cases/send-notification';
-import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory/in-memory-notifications-repository';
-import { makeQuestion } from '@/test/factories/make-question';
+import { InMemoryNotificationsRepository } from 'test/repositories/in-memory/in-memory-notifications-repository';
+import { makeQuestion } from 'test/factories/make-question';
 import { OnQuesiontBestAnswerChosen } from './on-question-best-answer-chosen';
 
 type SutTypes = {
