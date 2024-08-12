@@ -10,12 +10,12 @@ export class Attachment extends Entity<AttachmentProps> {
     return this.props.title;
   }
 
-  get link() {
-    return this.props.link;
+  get url() {
+    return this.props.url;
   }
 }
 
 export type AttachmentProps = {
   title: string;
-  link: string;
+  url: string;
 };

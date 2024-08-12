@@ -48,9 +48,14 @@ import { FetchQuestionCommentsController } from './controllers/fetch-question-co
 import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-question-comments';
 import { FetchAnswerCommentsController } from './controllers/fetch-answer-comments.controller';
 import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments';
+import { UploadAttachmentController } from './controllers/upload-attachment.controller';
+import { StorageModule } from '../storage/storage.module';
+import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment';
+import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository';
+import { Uploader } from '@/domain/forum/application/storage/uploader';
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule],
+  imports: [DatabaseModule, CryptographyModule, StorageModule],
   controllers: [
     AuthenticateController,
     CreateAccountController,
@@ -70,6 +75,7 @@ import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases
     DeleteAnswerCommentController,
     FetchQuestionCommentsController,
     FetchAnswerCommentsController,
+    UploadAttachmentController,
   ],
   providers: [
     makeFactoryProvider(AuthenticateStudentUseCase, [
@@ -116,6 +122,10 @@ import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases
       QuestionCommentsRepository,
     ]),
     makeFactoryProvider(FetchAnswerCommentsUseCase, [AnswerCommentsRepository]),
+    makeFactoryProvider(UploadAndCreateAttachmentUseCase, [
+      AttachmentsRepository,
+      Uploader,
+    ]),
   ],
 })
 export class HttpModule {}
