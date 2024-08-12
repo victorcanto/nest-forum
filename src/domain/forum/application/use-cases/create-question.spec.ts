@@ -5,6 +5,7 @@ import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memo
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;
+  questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
   sut: CreateQuestionUseCase;
 };
 
@@ -17,6 +18,7 @@ const makeSut = (): SutTypes => {
   const sut = new CreateQuestionUseCase(questionsRepository);
   return {
     questionsRepository,
+    questionAttachmentsRepository,
     sut,
   };
 };
@@ -41,5 +43,23 @@ describe('Create Question', () => {
       expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
     ]);
+  });
+
+  it('should persist attachments when creating a new question', async () => {
+    const { sut, questionAttachmentsRepository } = makeSut();
+    const result = await sut.execute({
+      authorId: '1',
+      title: 'title',
+      content: 'content',
+      attachmentsIds: ['1', '2'],
+    });
+    expect(result.isRight()).toBe(true);
+    expect(questionAttachmentsRepository.items).toHaveLength(2);
+    expect(questionAttachmentsRepository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
+        expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
+      ]),
+    );
   });
 });

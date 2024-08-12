@@ -4,10 +4,14 @@ import { QuestionsRepository } from '@/domain/forum/application/repositories/que
 import { PaginationParams } from '@/core/repositories/pagination-params';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
+import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository';
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly questionAttachmentsRepository: QuestionAttachmentsRepository,
+  ) {}
 
   async findById(id: string): Promise<Question | null> {
     const question = await this.prisma.question.findUnique({
@@ -58,6 +62,14 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
       },
       data,
     });
+
+    await this.questionAttachmentsRepository.createMany(
+      question.attachments.getNewItems(),
+    );
+
+    await this.questionAttachmentsRepository.deleteMany(
+      question.attachments.getRemovedItems(),
+    );
   }
 
   async create(question: Question): Promise<void> {
@@ -66,6 +78,10 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     await this.prisma.question.create({
       data,
     });
+
+    await this.questionAttachmentsRepository.createMany(
+      question.attachments.getItems(),
+    );
   }
 
   async delete(question: Question): Promise<void> {

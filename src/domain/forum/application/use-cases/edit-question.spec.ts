@@ -82,6 +82,47 @@ describe('Edit Question', () => {
     ]);
   });
 
+  it('should sync new and removed attachments when editing a question ', async () => {
+    const { sut, questionsRepository, questionAttachmentsRepository } =
+      makeSut();
+    const newQuestion = makeQuestion(
+      {
+        authorId: new UniqueEntityId('author-1'),
+        slug: Slug.create('example-question'),
+      },
+      new UniqueEntityId('question-1'),
+    );
+    await questionsRepository.create(newQuestion);
+    questionAttachmentsRepository.items.push(
+      makeQuestionAttachment({
+        attachmentId: new UniqueEntityId('1'),
+        questionId: newQuestion.id,
+      }),
+    );
+    questionAttachmentsRepository.items.push(
+      makeQuestionAttachment({
+        attachmentId: new UniqueEntityId('2'),
+        questionId: newQuestion.id,
+      }),
+    );
+    const result = await sut.execute({
+      questionId: newQuestion.id.toString(),
+      authorId: 'author-1',
+      title: 'new title',
+      content: 'new content',
+      attachmentsIds: ['1', '3'],
+    });
+
+    expect(result.isRight()).toBe(true);
+    expect(questionAttachmentsRepository.items).toHaveLength(2);
+    expect(questionAttachmentsRepository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
+        expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),
+      ]),
+    );
+  });
+
   it('should throws if question not found', async () => {
     const { sut } = makeSut();
     const result = await sut.execute({
