@@ -1,6 +1,6 @@
 import { Either, right } from '@/core/either';
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository';
-import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
+import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author';
 
 export class FetchQuestionCommentsUseCase {
   constructor(
@@ -11,13 +11,16 @@ export class FetchQuestionCommentsUseCase {
     questionId,
     page = 1,
   }: FetchQuestionCommentsUseCaseRequest): Promise<FetchQuestionCommentsUseCaseResponse> {
-    const questionComments =
-      await this.questionCommentsRepository.findManyByQuestionId(questionId, {
-        page,
-      });
+    const comments =
+      await this.questionCommentsRepository.findManyByQuestionIdWithAuthor(
+        questionId,
+        {
+          page,
+        },
+      );
 
     return right({
-      questionComments,
+      comments,
     });
   }
 }
@@ -30,6 +33,6 @@ type FetchQuestionCommentsUseCaseRequest = {
 type FetchQuestionCommentsUseCaseResponse = Either<
   null,
   {
-    questionComments: QuestionComment[];
+    comments: CommentWithAuthor[];
   }
 >;
