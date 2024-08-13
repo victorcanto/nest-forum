@@ -9,6 +9,8 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
+import { InMemoryAttachmentsRepository } from 'test/repositories/in-memory/in-memory-attachments-repository';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory/in-memory-students-repository';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;
@@ -17,10 +19,14 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
+  const attachmentsRepository = new InMemoryAttachmentsRepository();
+  const studentsRepository = new InMemoryStudentsRepository();
   const questionAttachmentsRepository =
     new InMemoryQuestionAttachmentsRepository();
   const questionsRepository = new InMemoryQuestionsRepository(
     questionAttachmentsRepository,
+    attachmentsRepository,
+    studentsRepository,
   );
   const answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
   const answersRepository = new InMemoryAnswersRepository(

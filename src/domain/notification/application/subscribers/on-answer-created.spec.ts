@@ -7,6 +7,8 @@ import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memo
 import { SendNotificationUseCase } from '../use-cases/send-notification';
 import { InMemoryNotificationsRepository } from 'test/repositories/in-memory/in-memory-notifications-repository';
 import { makeQuestion } from 'test/factories/make-question';
+import { InMemoryAttachmentsRepository } from 'test/repositories/in-memory/in-memory-attachments-repository';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory/in-memory-students-repository';
 
 type SutTypes = {
   answersRepository: InMemoryAnswersRepository;
@@ -15,10 +17,14 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
+  const attachmentsRepository = new InMemoryAttachmentsRepository();
+  const studentsRepository = new InMemoryStudentsRepository();
   const questionAttachmentsRepository =
     new InMemoryQuestionAttachmentsRepository();
   const questionsRepository = new InMemoryQuestionsRepository(
     questionAttachmentsRepository,
+    attachmentsRepository,
+    studentsRepository,
   );
   const answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository();
   const answersRepository = new InMemoryAnswersRepository(

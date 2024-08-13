@@ -4,6 +4,8 @@ import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memo
 import { CommentOnQuestionUseCase } from './comment-on-question';
 import { makeQuestion } from 'test/factories/make-question';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory/in-memory-students-repository';
+import { InMemoryAttachmentsRepository } from 'test/repositories/in-memory/in-memory-attachments-repository';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;
@@ -12,12 +14,18 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
+  const attachmentsRepository = new InMemoryAttachmentsRepository();
+  const studentsRepository = new InMemoryStudentsRepository();
   const questionAttachmentsRepository =
     new InMemoryQuestionAttachmentsRepository();
   const questionsRepository = new InMemoryQuestionsRepository(
     questionAttachmentsRepository,
+    attachmentsRepository,
+    studentsRepository,
   );
-  const questionCommentsRepository = new InMemoryQuestionCommentsRepository();
+  const questionCommentsRepository = new InMemoryQuestionCommentsRepository(
+    studentsRepository,
+  );
   const sut = new CommentOnQuestionUseCase(
     questionsRepository,
     questionCommentsRepository,

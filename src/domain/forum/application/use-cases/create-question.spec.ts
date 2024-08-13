@@ -2,6 +2,8 @@ import { InMemoryQuestionsRepository } from 'test/repositories/in-memory/in-memo
 import { CreateQuestionUseCase } from './create-question';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory/in-memory-question-attachments-repository';
+import { InMemoryAttachmentsRepository } from 'test/repositories/in-memory/in-memory-attachments-repository';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory/in-memory-students-repository';
 
 type SutTypes = {
   questionsRepository: InMemoryQuestionsRepository;
@@ -10,10 +12,14 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
+  const attachmentsRepository = new InMemoryAttachmentsRepository();
+  const studentsRepository = new InMemoryStudentsRepository();
   const questionAttachmentsRepository =
     new InMemoryQuestionAttachmentsRepository();
   const questionsRepository = new InMemoryQuestionsRepository(
     questionAttachmentsRepository,
+    attachmentsRepository,
+    studentsRepository,
   );
   const sut = new CreateQuestionUseCase(questionsRepository);
   return {
