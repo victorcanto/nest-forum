@@ -6,6 +6,7 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachment';
+import { Slug } from '../../enterprise/entities/value-objects/slug';
 
 type SutTypes = {
   answersRepository: InMemoryAnswersRepository;
@@ -68,6 +69,44 @@ describe('Edit Answer', () => {
       expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),
     ]);
+  });
+
+  it('should sync new and removed attachments when editing a question ', async () => {
+    const { sut, answersRepository, answerAttachmentsRespository } = makeSut();
+    const newAnswer = makeAnswer(
+      {
+        authorId: new UniqueEntityId('author-1'),
+      },
+      new UniqueEntityId('question-1'),
+    );
+    await answersRepository.create(newAnswer);
+    answerAttachmentsRespository.items.push(
+      makeAnswerAttachment({
+        attachmentId: new UniqueEntityId('1'),
+        answerId: newAnswer.id,
+      }),
+    );
+    answerAttachmentsRespository.items.push(
+      makeAnswerAttachment({
+        attachmentId: new UniqueEntityId('2'),
+        answerId: newAnswer.id,
+      }),
+    );
+    const result = await sut.execute({
+      answerId: newAnswer.id.toString(),
+      authorId: 'author-1',
+      content: 'new content',
+      attachmentsIds: ['1', '3'],
+    });
+
+    expect(result.isRight()).toBe(true);
+    expect(answerAttachmentsRespository.items).toHaveLength(2);
+    expect(answerAttachmentsRespository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
+        expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),
+      ]),
+    );
   });
 
   it('should throws if answer not found', async () => {

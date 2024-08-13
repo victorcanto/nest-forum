@@ -1,3 +1,4 @@
+import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository';
 import { Answer } from '@/domain/forum/enterprise/entities/answer';
 import { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository';
 import { PaginationParams } from '@/core/repositories/pagination-params';
@@ -7,7 +8,10 @@ import { PrismaAnswerMapper } from '../mappers/prisma-answer-mapper';
 
 @Injectable()
 export class PrismaAnswersRepository implements AnswersRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly answerAttachmentsRepository: AnswerAttachmentsRepository,
+  ) {}
 
   async findById(id: string): Promise<Answer | null> {
     const answer = await this.prisma.answer.findUnique({
@@ -50,6 +54,14 @@ export class PrismaAnswersRepository implements AnswersRepository {
       },
       data,
     });
+
+    await this.answerAttachmentsRepository.createMany(
+      answer.attachments.getNewItems(),
+    );
+
+    await this.answerAttachmentsRepository.deleteMany(
+      answer.attachments.getRemovedItems(),
+    );
   }
 
   async create(answer: Answer): Promise<void> {
@@ -58,6 +70,10 @@ export class PrismaAnswersRepository implements AnswersRepository {
     await this.prisma.answer.create({
       data,
     });
+
+    await this.answerAttachmentsRepository.createMany(
+      answer.attachments.getItems(),
+    );
   }
 
   async delete(answer: Answer): Promise<void> {
