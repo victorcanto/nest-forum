@@ -6,7 +6,6 @@ import { JwtService } from '@nestjs/jwt';
 import { StudentFactory } from 'test/factories/make-student';
 import { DatabaseModule } from '@/infra/database/database.module';
 import { QuestionFactory } from 'test/factories/make-question';
-import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug';
 
 describe('Upload attachment (e2e)', () => {
   let app: INestApplication;

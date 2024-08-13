@@ -1,4 +1,4 @@
-import { BadRequestException, Get, Query, UseGuards } from '@nestjs/common';
+import { BadRequestException, Get, Query } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { z } from 'zod';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';

@@ -4,6 +4,7 @@ import { CommentOnAnswerUseCase } from './comment-on-answer';
 import { makeAnswer } from 'test/factories/make-answer';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory/in-memory-students-repository';
 
 type SutTypes = {
   answersRepository: InMemoryAnswersRepository;
@@ -16,7 +17,10 @@ const makeSut = (): SutTypes => {
   const answersRepository = new InMemoryAnswersRepository(
     answerAttachmentsRepository,
   );
-  const answerCommentsRepository = new InMemoryAnswerCommentsRepository();
+  const studentsRepository = new InMemoryStudentsRepository();
+  const answerCommentsRepository = new InMemoryAnswerCommentsRepository(
+    studentsRepository,
+  );
   const sut = new CommentOnAnswerUseCase(
     answersRepository,
     answerCommentsRepository,

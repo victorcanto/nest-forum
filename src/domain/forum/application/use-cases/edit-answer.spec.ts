@@ -6,7 +6,6 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { NotAllowedError } from './errors/not-allowed-error';
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory/in-memory-answer-attachments-repository';
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachment';
-import { Slug } from '../../enterprise/entities/value-objects/slug';
 
 type SutTypes = {
   answersRepository: InMemoryAnswersRepository;

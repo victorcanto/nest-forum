@@ -11,7 +11,7 @@ import { EnvModule } from '@/infra/env/env.module';
   imports: [
     PassportModule,
     JwtModule.registerAsync({
-      imports : [EnvModule],
+      imports: [EnvModule],
       inject: [EnvService],
       global: true,
       useFactory: (env: EnvService) => {

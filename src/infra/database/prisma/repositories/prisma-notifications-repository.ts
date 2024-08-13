@@ -3,9 +3,7 @@ import { Notification } from '@/domain/notification/enterprise/entities/notifica
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class PrismaNotificationsRepository
-  implements NotificationsRepository
-{
+export class PrismaNotificationsRepository implements NotificationsRepository {
   findById(notificationId: string): Promise<Notification | null> {
     throw new Error('Method not implemented.');
   }

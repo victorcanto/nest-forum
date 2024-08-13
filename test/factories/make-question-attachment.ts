@@ -1,4 +1,3 @@
-import { PrismaQuestionAttachmentMapper } from './../../src/infra/database/prisma/mappers/prisma-question-attachment-mapper';
 import {
   QuestionAttachment,
   QuestionAttachmentProps,

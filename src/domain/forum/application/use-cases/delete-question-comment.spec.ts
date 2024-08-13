@@ -4,6 +4,7 @@ import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { DeleteQuestionCommentUseCase } from './delete-question-comment';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
 import { NotAllowedError } from './errors/not-allowed-error';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory/in-memory-students-repository';
 
 type SutTypes = {
   questionCommentsRepository: InMemoryQuestionCommentsRepository;
@@ -11,7 +12,10 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
-  const questionCommentsRepository = new InMemoryQuestionCommentsRepository();
+  const studentsRepository = new InMemoryStudentsRepository();
+  const questionCommentsRepository = new InMemoryQuestionCommentsRepository(
+    studentsRepository,
+  );
   const sut = new DeleteQuestionCommentUseCase(questionCommentsRepository);
   return {
     questionCommentsRepository,

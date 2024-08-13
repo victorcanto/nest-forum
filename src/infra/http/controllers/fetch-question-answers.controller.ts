@@ -1,15 +1,8 @@
-import {
-  BadRequestException,
-  Get,
-  Param,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { BadRequestException, Get, Param, Query } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { z } from 'zod';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 import { FetchQuestionAnswersUseCase } from '@/domain/forum/application/use-cases/fetch-question-answers';
-import { QuestionPresenter } from '../presenters/question-presenter';
 import { AnswerPresenter } from '../presenters/answer-presenter';
 
 const pageQueryParamSchema = z

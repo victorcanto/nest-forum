@@ -6,11 +6,7 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { DatabaseModule } from '@/infra/database/database.module';
 import { StudentFactory } from 'test/factories/make-student';
-import { QuestionFactory } from 'test/factories/make-question';
-import {
-  AttachmentFactory,
-  makeAttachment,
-} from 'test/factories/make-attachment';
+import { AttachmentFactory } from 'test/factories/make-attachment';
 
 describe('Create question (e2e)', () => {
   let app: INestApplication;

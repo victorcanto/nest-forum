@@ -4,7 +4,6 @@ import { PaginationParams } from '@/core/repositories/pagination-params';
 import { DomainEvents } from '@/core/events/domain-events';
 import { QuestionDetails } from '@/domain/forum/enterprise/entities/value-objects/question-details';
 import { InMemoryAttachmentsRepository } from './in-memory-attachments-repository';
-import { Attachment } from '@/domain/forum/enterprise/entities/attachment';
 import { InMemoryStudentsRepository } from './in-memory-students-repository';
 import { InMemoryQuestionAttachmentsRepository } from './in-memory-question-attachments-repository';
 
@@ -64,7 +63,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
           `Attachment with ID ${questionAttachment.attachmentId.toString()} does not exist.`,
         );
       }
-      
+
       return attachment;
     });
 

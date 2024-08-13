@@ -7,7 +7,6 @@ import { JwtService } from '@nestjs/jwt';
 import { DatabaseModule } from '@/infra/database/database.module';
 import { StudentFactory } from 'test/factories/make-student';
 import { AnswerFactory } from 'test/factories/make-answer';
-import { Answer } from '@prisma/client';
 import { QuestionFactory } from 'test/factories/make-question';
 
 describe('Delete answer (e2e)', () => {

@@ -61,7 +61,7 @@ describe('Answer question (e2e)', () => {
         content: 'New answer',
       },
     });
-    
+
     expect(answerOnDatavase).toBeTruthy();
 
     const attachmentsOnDatabase = await prisma.attachment.findMany({

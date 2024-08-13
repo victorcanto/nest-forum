@@ -1,7 +1,7 @@
 import { Provider } from '@nestjs/common';
 
 interface FactoryOptions<T> {
-  provide?: string | symbol | Function;
+  provide?: any;
   useFactory?: (...args: any[]) => T;
 }
 
