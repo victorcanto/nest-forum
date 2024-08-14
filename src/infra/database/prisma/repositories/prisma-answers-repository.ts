@@ -5,6 +5,8 @@ import { PaginationParams } from '@/core/repositories/pagination-params';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { PrismaAnswerMapper } from '../mappers/prisma-answer-mapper';
+import { Domain } from 'domain';
+import { DomainEvents } from '@/core/events/domain-events';
 
 @Injectable()
 export class PrismaAnswersRepository implements AnswersRepository {
@@ -62,6 +64,8 @@ export class PrismaAnswersRepository implements AnswersRepository {
     await this.answerAttachmentsRepository.deleteMany(
       answer.attachments.getRemovedItems(),
     );
+
+    DomainEvents.dispatchEventsForAggregate(answer.id);
   }
 
   async create(answer: Answer): Promise<void> {
@@ -74,6 +78,8 @@ export class PrismaAnswersRepository implements AnswersRepository {
     await this.answerAttachmentsRepository.createMany(
       answer.attachments.getItems(),
     );
+
+    DomainEvents.dispatchEventsForAggregate(answer.id);
   }
 
   async delete(answer: Answer): Promise<void> {

@@ -46,6 +46,6 @@ export type NotificationProps = {
   recipientId: UniqueEntityId;
   title: string;
   content: string;
-  readAt?: Date;
+  readAt?: Date | null;
   createdAt: Date;
 };
