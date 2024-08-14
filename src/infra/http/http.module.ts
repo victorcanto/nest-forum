@@ -53,6 +53,9 @@ import { StorageModule } from '../storage/storage.module';
 import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment';
 import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository';
 import { Uploader } from '@/domain/forum/application/storage/uploader';
+import { ReadNotificationController } from './controllers/read-notification.controller';
+import { ReadNotificationUseCase } from '@/domain/notification/application/use-cases/read-notification';
+import { NotificationsRepository } from '@/domain/notification/application/repositories/notifications-repository';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, StorageModule],
@@ -76,6 +79,7 @@ import { Uploader } from '@/domain/forum/application/storage/uploader';
     FetchQuestionCommentsController,
     FetchAnswerCommentsController,
     UploadAttachmentController,
+    ReadNotificationController,
   ],
   providers: [
     makeFactoryProvider(AuthenticateStudentUseCase, [
@@ -126,6 +130,7 @@ import { Uploader } from '@/domain/forum/application/storage/uploader';
       AttachmentsRepository,
       Uploader,
     ]),
+    makeFactoryProvider(ReadNotificationUseCase, [NotificationsRepository]),
   ],
 })
 export class HttpModule {}
